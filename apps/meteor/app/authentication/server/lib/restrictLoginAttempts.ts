@@ -100,7 +100,7 @@ export const isValidAttemptByUser = async (login: ILoginAttempt): Promise<boolea
 		return true;
 	}
 
-	const loginUsername = login.methodArguments[0].user?.username;
+	const loginUsername = login.methodArguments[0]?.user?.username;
 	if (!loginUsername) {
 		return true;
 	}
@@ -147,7 +147,7 @@ export const isValidAttemptByUser = async (login: ILoginAttempt): Promise<boolea
 export const saveFailedLoginAttempts = async (login: ILoginAttempt): Promise<void> => {
 	const user: IServerEvent['u'] = {
 		_id: login.user?._id,
-		username: login.user?.username || login.methodArguments[0].user?.username,
+		username: login.user?.username || login.methodArguments[0]?.user?.username,
 	};
 
 	await ServerEvents.insertOne({
@@ -161,7 +161,7 @@ export const saveFailedLoginAttempts = async (login: ILoginAttempt): Promise<voi
 export const saveSuccessfulLogin = async (login: ILoginAttempt): Promise<void> => {
 	const user: IServerEvent['u'] = {
 		_id: login.user?._id,
-		username: login.user?.username || login.methodArguments[0].user?.username,
+		username: login.user?.username || login.methodArguments[0]?.user?.username,
 	};
 
 	await ServerEvents.insertOne({
